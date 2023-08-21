@@ -6,6 +6,7 @@
   "author": "<juan_jg@hotmail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "tsc",
     "dev": "tsx watch --inspect src/server.ts",
     "typeorm": "tsx watch ./node_modules/typeorm/cli.js"
   },

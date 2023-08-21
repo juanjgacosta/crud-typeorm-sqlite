@@ -13,7 +13,7 @@ interface IUsersRepository {
   findUserById(id: string): Promise<User>
   listUsers(): Promise<User[]>
   removeUser(id: string): Promise<User>
-  updateUser({ id, name, email, company }: ICreateUserDTO): Promise<User>
+  updateUser({ id, name, email, company }: ICreateUserDTO): Promise<any>
 }
 
 export { ICreateUserDTO, IUsersRepository }

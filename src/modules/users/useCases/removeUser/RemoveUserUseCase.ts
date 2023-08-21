@@ -6,6 +6,7 @@ class RemoveUserUseCase {
 
   async execute(id: string): Promise<User> {
     const user = await this.usersRepository.findUserById(id)
+    console.log('user use case: ', user)
 
     if (!user) {
       throw new TypeError('User not registered')

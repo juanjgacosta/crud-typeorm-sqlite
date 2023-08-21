@@ -50,7 +50,7 @@ class UsersRepository implements IUsersRepository {
     return await userRepository.remove(user)
   }
 
-  updateUser({ id, name, email, company }: ICreateUserDTO): Promise<User> {
+  updateUser({ id, name, email, company }: ICreateUserDTO): Promise<any> {
     const userRepository = AppDataSource.getRepository(User)
 
     const user = userRepository.update({ id }, { name, email, company })

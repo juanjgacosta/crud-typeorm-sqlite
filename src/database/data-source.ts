@@ -3,10 +3,10 @@ import { DataSource } from 'typeorm'
 
 export const AppDataSource = new DataSource({
   type: 'sqlite',
-  host: 'localhost',
-  port: 4001,
-  username: 'root',
-  password: 'root',
+  // host: 'localhost',
+  // port: 4001,
+  // username: 'root',
+  // password: 'root',
   database: './src/database/database.sqlite',
   synchronize: false,
   logging: false,
