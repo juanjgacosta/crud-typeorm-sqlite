@@ -11,7 +11,7 @@ class RemoveUserController {
       return res.status(200).json({ message: `The User - ${user.email} - has been removed` })
     } catch (error) {
       const msgError = error as TypeError
-      return res.status(404).json({ message: msgError })
+      return res.status(404).json({ message: msgError.message })
     }
   }
 }
