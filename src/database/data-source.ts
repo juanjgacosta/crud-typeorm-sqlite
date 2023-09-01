@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import { DataSource } from 'typeorm'
 
 export const AppDataSource = new DataSource({
@@ -12,4 +11,10 @@ export const AppDataSource = new DataSource({
   logging: false,
   entities: ['./src/modules/users/entities/**.ts'],
   migrations: ['./src/database/migrations/**.ts'],
+})
+
+AppDataSource.initialize().then((async) => {
+  console.log('Database connection ok')
+}).catch((err) => {
+  console.error('Database error connection: ', err)
 })
