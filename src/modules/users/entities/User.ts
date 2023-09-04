@@ -15,6 +15,9 @@ class User {
   @Column('varchar')
   company: string
 
+  @Column('varchar')
+  password: string
+
   @CreateDateColumn()
   created_at: Date
 

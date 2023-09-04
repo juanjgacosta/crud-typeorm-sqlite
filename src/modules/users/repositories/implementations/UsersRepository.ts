@@ -3,13 +3,14 @@ import { User } from '../../entities/User'
 import { ICreateUserDTO, IUsersRepository } from '../IUsersRepository'
 
 class UsersRepository implements IUsersRepository {
-  async createUser({ name, email, company }: ICreateUserDTO): Promise<User> {
+  async createUser({ name, email, company, password }: ICreateUserDTO): Promise<User> {
     const userRepository = AppDataSource.getRepository(User)
 
     const user = userRepository.create({
       name,
       email,
       company,
+      password,
     })
     await userRepository.save(user)
     return user
@@ -50,10 +51,10 @@ class UsersRepository implements IUsersRepository {
     return await userRepository.remove(user)
   }
 
-  updateUser({ id, name, email, company }: ICreateUserDTO): Promise<any> {
+  updateUser({ id, name, email, company, password }: ICreateUserDTO): Promise<any> {
     const userRepository = AppDataSource.getRepository(User)
 
-    const user = userRepository.update({ id }, { name, email, company })
+    const user = userRepository.update({ id }, { name, email, company, password })
     return user
   }
 }
