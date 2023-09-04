@@ -6,7 +6,6 @@ class CreateUserController {
 
   async handle(req: Request, res: Response): Promise<Response> {
     const { name, email, company, password } = req.body
-    // console.log('password: ', password)
 
     try {
       const user = await this.createUserUseCase.execute({ name, email, company, password })
