@@ -1,16 +1,19 @@
 import { AppDataSource } from '../../../../database/data-source'
 import { User } from '../../entities/User'
 import { ICreateUserDTO, IUsersRepository } from '../IUsersRepository'
+import { hash } from 'bcryptjs'
 
 class UsersRepository implements IUsersRepository {
   async createUser({ name, email, company, password }: ICreateUserDTO): Promise<User> {
     const userRepository = AppDataSource.getRepository(User)
 
+    const passwordHash = await hash(password, 8)
+
     const user = userRepository.create({
       name,
       email,
       company,
-      password,
+      password: passwordHash,
     })
     await userRepository.save(user)
     return user
