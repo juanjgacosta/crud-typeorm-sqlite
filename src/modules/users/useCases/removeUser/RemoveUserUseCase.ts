@@ -1,3 +1,4 @@
+import { AppError } from '../../../../errors/AppError'
 import { User } from '../../entities/User'
 import { IUsersRepository } from '../../repositories/IUsersRepository'
 
@@ -8,7 +9,7 @@ class RemoveUserUseCase {
     const user = await this.usersRepository.findUserById(id)
 
     if (!user) {
-      throw new TypeError('User not registered')
+      throw new AppError('User not registered', 404)
     }
 
     await this.usersRepository.removeUser(id)

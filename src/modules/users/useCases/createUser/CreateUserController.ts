@@ -7,13 +7,9 @@ class CreateUserController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { name, email, company, password } = req.body
 
-    try {
-      const user = await this.createUserUseCase.execute({ name, email, company, password })
-      return res.status(201).json(user)
-    } catch (error) {
-      const msgError = error as TypeError
-      return res.status(400).json({ message: msgError.message })
-    }
+    const user = await this.createUserUseCase.execute({ name, email, company, password })
+
+    return res.status(201).json(user)
   }
 }
 

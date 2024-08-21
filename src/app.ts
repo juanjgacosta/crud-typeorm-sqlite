@@ -1,9 +1,11 @@
 import 'reflect-metadata'
 import express, { Request, Response, NextFunction } from 'express'
+import 'express-async-errors'
+import { AppError } from './errors/AppError'
+
 import { usersRoutes } from './routes/users.routes'
 
 import './database/data-source.ts'
-import { AppError } from './errors/AppError'
 
 const app = express()
 
