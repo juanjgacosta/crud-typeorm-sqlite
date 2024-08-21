@@ -10,13 +10,13 @@ Crud Project using Typeorm with sqlite database
 $ nvm use
 ```
 
-### Install
+### Install necessary packages
 
 ```bash
 $ yarn
 ```
 
-### Development
+### Run in development mode
 
 ```bash
 $ yarn dev
