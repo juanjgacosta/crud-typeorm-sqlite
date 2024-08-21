@@ -10,9 +10,17 @@ import './database/data-source.ts'
 const app = express()
 
 app.use(express.json())
+
+app.use((request, response, next) => {
+  response.on('finish', () => {
+    console.log(`${request.method} ${request.originalUrl} ${response.statusCode}`)
+  })
+  next()
+})
+
 app.use('/users', usersRoutes)
-app.get('/', (req, res) => {
-  const { name } = req.body
+
+app.get('/checkHealth', (req, res) => {
   return res.json({ message: 'ok' })
 })
 
