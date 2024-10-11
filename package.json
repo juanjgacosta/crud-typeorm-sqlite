@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "tsc",
-    "dev": "tsx watch --inspect src/server.ts",
+    "dev": "tsx watch --inspect=127.0.0.1:9230 src/server.ts",
     "typeorm": "tsx watch ./node_modules/typeorm/cli.js",
     "test": "jest"
   },
@@ -17,6 +17,7 @@
     "jsonwebtoken": "^9.0.2",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^5.1.6",
+    "tsyringe": "^4.8.0",
     "typeorm": "^0.3.17",
     "uuid": "^9.0.0"
   },

@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe'
+
 import { AppError } from '../../../../errors/AppError'
 import { User } from '../../entities/User'
 import { IUsersRepository } from '../../repositories/IUsersRepository'
@@ -9,8 +11,12 @@ interface IRequest {
   password: string
 }
 
+@injectable()
 class CreateUserUseCase {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository
+  ) {}
 
   async execute({ name, email, company, password }: IRequest): Promise<User> {
     const userExists = await this.usersRepository.findUserByEmail(email)

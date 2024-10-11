@@ -7,6 +7,8 @@ import { usersRoutes } from './routes/users.routes'
 
 import './database/data-source.ts'
 
+import './shared/container'
+
 const app = express()
 
 app.use(express.json())
