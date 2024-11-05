@@ -2,14 +2,19 @@ import { IUsersRepository } from '../../repositories/IUsersRepository'
 import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 import { AppError } from '../../../../errors/AppError'
+import { inject, injectable } from 'tsyringe'
 
 interface IRequest {
   email: string
   password: string
 }
 
+@injectable()
 class AuthenticateUserUseCase {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository
+  ) {}
 
   async execute({ email, password }: IRequest) {
     const user = await this.usersRepository.findUserByEmail(email)
