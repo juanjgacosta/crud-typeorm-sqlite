@@ -21,8 +21,9 @@ class UsersRepositoryInMemory implements IUsersRepository {
     const user = this.users.find((user) => user.email === email)
     return user
   }
-  findUserById(id: string): Promise<User> {
-    throw new Error('Method not implemented.')
+  async findUserById(id: string): Promise<User> {
+    const user = this.users.find((user) => user.id === id)
+    return user
   }
   async listUsers(): Promise<User[]> {
     const all = this.users
