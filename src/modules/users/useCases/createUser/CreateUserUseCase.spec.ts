@@ -20,7 +20,7 @@ describe('Create User', () => {
     }
     const userCreated = await createUserUseCase.execute(user)
 
-    console.log('userCreated: ', userCreated)
+    // console.log('userCreated: ', userCreated)
 
     expect(userCreated).toHaveProperty('id')
   })

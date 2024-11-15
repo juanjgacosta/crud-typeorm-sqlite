@@ -40,7 +40,7 @@ class AuthenticateUserUseCase {
       }
     )
 
-    return token
+    return { token }
   }
 }
 
