@@ -26,3 +26,13 @@ AppDataSource.initialize()
   .catch((err) => {
     console.error('Database error connection: ', err)
   })
+
+// export async function initializeDatabase(): Promise<void> {
+//   try {
+//     await AppDataSource.initialize()
+//     console.log(`Database connection ok with: ${AppDataSource.options.database}`)
+//   } catch (err) {
+//     console.error('Database error connection: ', err)
+//     throw err // Repassa o erro para quem chamar a função
+//   }
+// }

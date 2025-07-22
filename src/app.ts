@@ -6,6 +6,7 @@ import { AppError } from './errors/AppError'
 import { usersRoutes } from './routes/users.routes'
 
 import './database/data-source.ts'
+// import './database/data-source'
 
 import './shared/container'
 
