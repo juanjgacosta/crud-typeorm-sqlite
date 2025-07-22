@@ -48,6 +48,82 @@
           }
         }
       }
+    },
+    "/users/auth": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ]
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "User"
+        ]
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List users",
+        "description": "List all registered users",
+        "responses": {
+          "200": {
+            "description": "Query result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "company": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "updated_at": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "id": "abc123",
+                    "name": "User1 Name",
+                    "email": "user1@email.com",
+                    "company": "Company Name User 1",
+                    "created_at": "2025-07-22T16:19:10.000Z",
+                    "updated_at": "2025-07-22T16:19:10.000Z"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ]
+      }
     }
   }
 }

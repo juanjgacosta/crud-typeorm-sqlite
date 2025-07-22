@@ -23,7 +23,7 @@ usersRoutes.put('/:id', (req, res) => {
   return updateUserController.handle(req, res)
 })
 
-usersRoutes.post('/login', (req, res) => {
+usersRoutes.post('/auth', (req, res) => {
   return authenticationUserController.handle(req, res)
 })
 
