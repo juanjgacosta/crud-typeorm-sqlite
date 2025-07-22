@@ -2,13 +2,52 @@
   "openapi": "3.0.0",
   "info": {
     "title": "API documentation",
-    "description": "This is the documentation for the CRUD SQLite TypeORM project"
+    "description": "This is the documentation for the CRUD SQLite TypeORM project",
+    "version": "1.0.0"
   },
-  "version": "1.0.0",
   "servers": [
     {
       "url": "http://localhost:4000",
       "description": "Test API"
     }
-  ]
+  ],
+  "paths": {
+    "/checkHealth": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Server health",
+        "description": "Check Server health",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "message"
+                  ]
+                },
+                "examples": {
+                  "ExampleOk": {
+                    "summary": "server ok",
+                    "value": {
+                      "message": "ok"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
