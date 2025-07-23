@@ -53,7 +53,47 @@
       "post": {
         "tags": [
           "Authentication"
-        ]
+        ],
+        "summary": "Register users",
+        "description": "Register a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthenticateUser"
+              },
+              "examples": {
+                "adminUser": {
+                  "value": {
+                    "email": "johndoe@email.com",
+                    "password": "mudar123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthenticationResponse"
+                },
+                "examples": {
+                  "token": {
+                    "value": {
+                      "name": "John Doe",
+                      "email": "johndoe@email.com",
+                      "token": "JwtToken"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/users": {
@@ -214,7 +254,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/users/{id}": {
       "put": {
         "tags": [
           "User"
@@ -229,6 +271,31 @@
   },
   "components": {
     "schemas": {
+      "AuthenticateUser": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthenticationResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
       "RegisterUser": {
         "type": "object",
         "properties": {
