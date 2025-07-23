@@ -61,6 +61,11 @@
         "tags": [
           "User"
         ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "summary": "Register users",
         "description": "Register a user",
         "requestBody": {
@@ -120,6 +125,38 @@
                 "example": {
                   "status": "error",
                   "message": "User already registered"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "TokenMissing": {
+                    "value": {
+                      "status": "error",
+                      "message": "Token missing"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "status": "error",
+                      "message": "Token expired"
+                    }
+                  }
                 }
               }
             }
@@ -234,6 +271,13 @@
             "type": "string"
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
