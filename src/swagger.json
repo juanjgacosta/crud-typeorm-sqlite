@@ -60,7 +60,71 @@
       "post": {
         "tags": [
           "User"
-        ]
+        ],
+        "summary": "Register users",
+        "description": "Register a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterUser"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "John Doe",
+                    "email": "johndoe@email.com",
+                    "company": "Company Name",
+                    "password": "mudar123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterUserResponse"
+                },
+                "example": {
+                  "id": "abc123",
+                  "name": "John Doe",
+                  "email": "johndoe@email.com",
+                  "company": "Company Name",
+                  "password": "hashPassword",
+                  "created_at": "2025-07-23T13:00:14.000Z",
+                  "updated_at": "2025-07-23T13:00:14.000Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "status": "error",
+                  "message": "User already registered"
+                }
+              }
+            }
+          }
+        }
       },
       "get": {
         "tags": [
@@ -123,6 +187,53 @@
         "tags": [
           "User"
         ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RegisterUser": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterUserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
       }
     }
   }
