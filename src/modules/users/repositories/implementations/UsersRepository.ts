@@ -1,6 +1,6 @@
 import { AppDataSource } from '../../../../database/data-source'
 import { User } from '../../entities/User'
-import { ICreateUserDTO, IUsersRepository } from '../IUsersRepository'
+import { ICreateUserDTO, IUsersRepository, PublicUserInfoDTO } from '../IUsersRepository'
 import { hash } from 'bcryptjs'
 
 class UsersRepository implements IUsersRepository {
@@ -38,10 +38,17 @@ class UsersRepository implements IUsersRepository {
     return user
   }
 
-  async listUsers(): Promise<User[]> {
+  async listUsers(): Promise<PublicUserInfoDTO[]> {
     const userRepository = AppDataSource.getRepository(User)
     const users = await userRepository.find()
-    return users
+    return users.map((user) => ({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      company: user.company,
+      created_at: user.created_at,
+      updated_at: user.updated_at,
+    }))
   }
 
   async removeUser(id: string): Promise<User> {
