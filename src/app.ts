@@ -1,15 +1,18 @@
 import 'reflect-metadata'
 import express, { Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
+import swaggerUi from 'swagger-ui-express'
 import { AppError } from './errors/AppError'
 
 import { usersRoutes } from './routes/users.routes'
-
 import './database/data-source.ts'
+import swaggerFile from './swagger.json'
 
 const app = express()
 
 app.use(express.json())
+
+app.use('/documentation', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 app.use((request, response, next) => {
   response.on('finish', () => {

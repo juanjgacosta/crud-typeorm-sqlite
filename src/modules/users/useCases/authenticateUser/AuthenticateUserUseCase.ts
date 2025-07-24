@@ -8,6 +8,12 @@ interface IRequest {
   password: string
 }
 
+interface IResponse {
+  name: string
+  email: string
+  token: string
+}
+
 class AuthenticateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
@@ -31,11 +37,17 @@ class AuthenticateUserUseCase {
       '934651a3c23ade31c1328656b9497e19',
       {
         subject: user.id,
-        expiresIn: '1d',
+        expiresIn: '5m',
       }
     )
 
-    return token
+    const tokenReturn: IResponse = {
+      name: user.name,
+      email: user.email,
+      token,
+    }
+
+    return tokenReturn
   }
 }
 

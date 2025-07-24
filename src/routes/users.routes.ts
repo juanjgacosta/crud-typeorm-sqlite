@@ -5,9 +5,11 @@ import { removeUserController } from '../modules/users/useCases/removeUser'
 import { updateUserController } from '../modules/users/useCases/updateUser'
 import { authenticationUserController } from '../modules/users/useCases/authenticateUser'
 
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
+
 const usersRoutes = Router()
 
-usersRoutes.post('/', (req, res) => {
+usersRoutes.post('/', ensureAuthenticated, (req, res) => {
   return createUserController.handle(req, res)
 })
 
@@ -15,15 +17,15 @@ usersRoutes.get('/', (req, res) => {
   return listUsersController.handle(req, res)
 })
 
-usersRoutes.delete('/:id', (req, res) => {
+usersRoutes.delete('/:id', ensureAuthenticated, (req, res) => {
   return removeUserController.handle(req, res)
 })
 
-usersRoutes.put('/:id', (req, res) => {
+usersRoutes.put('/:id', ensureAuthenticated, (req, res) => {
   return updateUserController.handle(req, res)
 })
 
-usersRoutes.post('/login', (req, res) => {
+usersRoutes.post('/auth', (req, res) => {
   return authenticationUserController.handle(req, res)
 })
 
