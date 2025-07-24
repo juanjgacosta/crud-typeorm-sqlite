@@ -174,15 +174,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
                 },
                 "examples": {
                   "TokenMissing": {
@@ -260,12 +252,166 @@
       "put": {
         "tags": [
           "User"
-        ]
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Update user",
+        "description": "Update a user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUser"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "John Doe Updated",
+                    "email": "johndoeupdated@email.com",
+                    "company": "Company Name"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUserResponse"
+                },
+                "example": {
+                  "message": "user - userName@email.com - updated"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                },
+                "examples": {
+                  "TokenMissing": {
+                    "value": {
+                      "status": "error",
+                      "message": "Token missing"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "status": "error",
+                      "message": "Token expired"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                },
+                "example": {
+                  "status": "error",
+                  "message": "User not registered"
+                }
+              }
+            }
+          }
+        }
       },
       "delete": {
         "tags": [
           "User"
-        ]
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Delete users",
+        "description": "Delete a user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteUserResponse"
+                },
+                "example": {
+                  "message": "The User - userName@email.com - has been removed"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                },
+                "examples": {
+                  "TokenMissing": {
+                    "value": {
+                      "status": "error",
+                      "message": "Token missing"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "status": "error",
+                      "message": "Token expired"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                },
+                "example": {
+                  "status": "error",
+                  "message": "User not registered"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -335,6 +481,58 @@
             "type": "string"
           },
           "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateUser": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateUserResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteUserResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "NotFoundResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "UnauthorizedResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "message": {
             "type": "string"
           }
         }
