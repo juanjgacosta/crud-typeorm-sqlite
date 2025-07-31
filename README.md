@@ -21,13 +21,13 @@ $ nvm use
 - Install necessary packages
 
 ```bash
-$ yarn
+$ npm install
 ```
 
 - Run in development mode
 
 ```bash
-$ yarn dev
+$ npm run dev
 ```
 
 ## User entity
