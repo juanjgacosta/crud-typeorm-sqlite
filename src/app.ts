@@ -6,6 +6,7 @@ import { AppError } from './errors/AppError'
 
 import { usersRoutes } from './routes/users.routes'
 import './database/data-source.ts'
+import './shared/container'
 import swaggerFile from './swagger.json'
 
 const app = express()

@@ -1,6 +1,7 @@
 import { AppDataSource } from '../../../../database/data-source'
 import { User } from '../../entities/User'
-import { ICreateUserDTO, IUsersRepository, PublicUserInfoDTO } from '../IUsersRepository'
+import { IUsersRepository } from '../IUsersRepository'
+import { ICreateUserDTO, PublicUserInfoDTO } from '../../dtos'
 import { hash } from 'bcryptjs'
 
 class UsersRepository implements IUsersRepository {

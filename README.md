@@ -8,6 +8,8 @@ CRUD Project using Typeorm with sqlite database
 - [User entity](#user-entity)
 - [User Schema Definition](#user-schema-definition)
 - [Additional Notes](#additional-notes)
+- [Dependency Injection](#dependency-injection)
+  - [How it works](#how-it-works)
 - [API Documentation](#api-documentation)
 
 ## Project Setup
@@ -50,6 +52,36 @@ The `User` entity is defined with the following fields:
 
 - **Email Uniqueness**: The project verifies that the email field is unique to avoid duplicate user accounts.
 - **Password Storage**: The password is always saved as an encrypted string for security reasons.
+
+## Dependency Injection
+
+This project follows the **Inversion of Control** principle by using the [`tsyringe`](https://github.com/microsoft/tsyringe) library for dependency injection.
+
+By using dependency injection, the application achieves:
+
+- ✅ Better separation of concerns
+- ✅ Easier unit testing and mocking
+- ✅ Decoupled service implementations
+
+### How it works
+
+Services and repositories are registered as injectable classes and resolved automatically by the container. This avoids direct instantiation (`new`) and allows greater flexibility and scalability.
+
+For example:
+
+```ts
+@injectable()
+class CreateUserUseCase {
+  constructor(
+    @inject("UsersRepository")
+    private usersRepository: IUsersRepository
+  ) {}
+
+  async execute(data: ICreateUserDTO) {
+    // Implementation...
+  }
+}
+```
 
 ## API Documentation
 

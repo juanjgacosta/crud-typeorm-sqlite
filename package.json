@@ -17,6 +17,7 @@
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^5.1.6",
     "swagger-ui-express": "^5.0.1",
+    "tsyringe": "^4.10.0",
     "typeorm": "^0.3.17",
     "uuid": "^9.0.0"
   },
