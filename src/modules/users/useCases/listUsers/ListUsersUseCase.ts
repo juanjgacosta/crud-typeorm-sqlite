@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe'
-import { IUsersRepository, PublicUserInfoDTO } from '../../repositories/IUsersRepository'
+import { IUsersRepository } from '../../repositories/IUsersRepository'
+import { PublicUserInfoDTO } from '../../dtos'
 @injectable()
 class ListUsersUseCase {
   constructor(

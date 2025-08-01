@@ -2,13 +2,8 @@ import { inject, injectable } from 'tsyringe'
 import { AppError } from '../../../../errors/AppError'
 import { User } from '../../entities/User'
 import { IUsersRepository } from '../../repositories/IUsersRepository'
+import { ICreateUserDTO } from '../../dtos'
 
-interface IRequest {
-  name: string
-  email: string
-  company: string
-  password: string
-}
 @injectable()
 class CreateUserUseCase {
   constructor(
@@ -16,7 +11,7 @@ class CreateUserUseCase {
     private usersRepository: IUsersRepository
   ) {}
 
-  async execute({ name, email, company, password }: IRequest): Promise<User> {
+  async execute({ name, email, company, password }: ICreateUserDTO): Promise<User> {
     const userExists = await this.usersRepository.findUserByEmail(email)
 
     if (userExists) {
