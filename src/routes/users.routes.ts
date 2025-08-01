@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { createUserController } from '../modules/users/useCases/createUser'
+import { CreateUserController } from '../modules/users/useCases/createUser/CreateUserController'
 import { ListUsersController } from '../modules/users/useCases/listUsers/ListUsersController'
 import { removeUserController } from '../modules/users/useCases/removeUser'
 import { updateUserController } from '../modules/users/useCases/updateUser'
@@ -9,12 +9,10 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 
 const usersRoutes = Router()
 
+const createUserController = new CreateUserController()
 const listUsersController = new ListUsersController()
 
-usersRoutes.post('/', ensureAuthenticated, (req, res) => {
-  return createUserController.handle(req, res)
-})
-
+usersRoutes.post('/', ensureAuthenticated, createUserController.handle)
 usersRoutes.get('/', listUsersController.handle)
 
 usersRoutes.delete('/:id', ensureAuthenticated, (req, res) => {
