@@ -1,8 +1,11 @@
-import { User } from '../../entities/User'
+import { inject, injectable } from 'tsyringe'
 import { IUsersRepository, PublicUserInfoDTO } from '../../repositories/IUsersRepository'
-
+@injectable()
 class ListUsersUseCase {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository
+  ) {}
 
   async execute(): Promise<PublicUserInfoDTO[]> {
     const users = await this.usersRepository.listUsers()
