@@ -18,16 +18,20 @@ export async function ensureAuthenticated(req: Request, res: Response, next: Nex
 
     console.log('### decoded: ', decoded)
 
-    const userId = decoded.sub
+    const userId = String(decoded.sub)
 
     const usersRepository = new UsersRepository()
 
-    const user = await usersRepository.findUserById(userId as string)
+    const user = await usersRepository.findUserById(userId)
+
+    req.user = {
+      id: userId,
+    }
   } catch (err) {
     if (err instanceof TokenExpiredError) {
       throw new AppError('Token expired', 401)
     }
-    throw new AppError('User does not exists!', 401)
+    throw new AppError('User does not exists!', 403)
   }
   next()
 }
