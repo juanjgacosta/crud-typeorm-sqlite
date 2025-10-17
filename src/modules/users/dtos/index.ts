@@ -4,6 +4,7 @@ interface ICreateUserDTO {
   email: string
   company: string
   password: string
+  avatar?: string
 }
 
 interface IUpdateUserDTO {

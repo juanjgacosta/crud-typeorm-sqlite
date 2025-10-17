@@ -5,16 +5,18 @@ import { ICreateUserDTO, PublicUserInfoDTO } from '../../dtos'
 import { hash } from 'bcryptjs'
 
 class UsersRepository implements IUsersRepository {
-  async createUser({ name, email, company, password }: ICreateUserDTO): Promise<User> {
+  async createUser({ id, name, email, company, password, avatar }: ICreateUserDTO): Promise<User> {
     const userRepository = AppDataSource.getRepository(User)
 
     const passwordHash = await hash(password, 8)
 
     const user = userRepository.create({
+      id,
       name,
       email,
       company,
       password: passwordHash,
+      avatar,
     })
     await userRepository.save(user)
     return user
@@ -47,6 +49,7 @@ class UsersRepository implements IUsersRepository {
       name: user.name,
       email: user.email,
       company: user.company,
+      avatar: user.avatar ? user.avatar : '' ,
       created_at: user.created_at,
       updated_at: user.updated_at,
     }))
