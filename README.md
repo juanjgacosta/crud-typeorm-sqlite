@@ -5,6 +5,9 @@ CRUD Project using Typeorm with sqlite database
 <h2> Table of Contents</h2>
 
 - [Project Setup](#project-setup)
+- [Database Migrations](#database-migrations)
+  - [Migration Commands](#migration-commands)
+  - [Example](#example)
 - [User entity](#user-entity)
 - [User Schema Definition](#user-schema-definition)
 - [Additional Notes](#additional-notes)
@@ -31,6 +34,34 @@ $ npm install
 ```bash
 $ npm run dev
 ```
+
+## Database Migrations
+
+The project uses **TypeORM** migrations to manage database schema changes in a controlled way.
+
+### Migration Commands
+
+| Action                               | Script (package.json)                                                                            | Terminal Command                                    |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------ | --------------------------------------------------- |
+| 🆕 Create a new migration            | `"dev:migration:create": "typeorm migration:create ./src/database/migrations/$npm_config_name"`  | `npm run dev:migration:create --name=MigrationName` |
+| ▶️ Run all pending migrations        | `"dev:migration:run": "npm run typeorm -- migration:run -d ./src/database/data-source.ts"`       | `npm run dev:migration:run`                         |
+| ⏪ Revert the last applied migration | `"dev:migration:revert": "npm run typeorm -- migration:revert -d ./src/database/data-source.ts"` | `npm run dev:migration:revert`                      |
+
+> **Note:** Each migration file contains two methods:
+>
+> - `up()`: defines the changes to apply (e.g., adding a table or column).
+> - `down()`: defines how to revert those changes (e.g., dropping that table or column).
+>
+> Only one migration is reverted per execution of `migration:revert`.
+
+### Example
+
+Creating and applying a migration named `AlterUserAddAvatar`:
+
+````bash
+npm run dev:migration:create --name=AlterUserAddAvatar
+npm run dev:migration:run
+````
 
 ## User entity
 
@@ -81,7 +112,7 @@ class CreateUserUseCase {
     // Implementation...
   }
 }
-```
+````
 
 ## API Documentation
 
