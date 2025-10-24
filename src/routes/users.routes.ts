@@ -9,7 +9,7 @@ import { AuthenticateUserController } from '../modules/users/useCases/authentica
 
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 
-import { UpdateUserAvatarController } from '../modules/users/useCases/updateUserAvatarUseCase/UpdateUserAvatarController'
+import { UpdateUserAvatarController } from '../modules/users/useCases/updateUserAvatar/UpdateUserAvatarController'
 import uploadConfig from '../config/upoad'
 
 const usersRoutes = Router()

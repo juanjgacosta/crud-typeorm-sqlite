@@ -24,4 +24,9 @@ interface PublicUserInfoDTO {
   updated_at: Date
 }
 
-export { ICreateUserDTO, IUpdateUserDTO, PublicUserInfoDTO }
+interface IUpdateUserAvatarDTO {
+  id: string
+  avatar: string
+}
+
+export { ICreateUserDTO, IUpdateUserDTO, PublicUserInfoDTO, IUpdateUserAvatarDTO }

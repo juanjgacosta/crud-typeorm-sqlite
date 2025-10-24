@@ -1,7 +1,7 @@
 import { AppDataSource } from '../../../../database/data-source'
 import { User } from '../../entities/User'
 import { IUsersRepository } from '../IUsersRepository'
-import { ICreateUserDTO, PublicUserInfoDTO } from '../../dtos'
+import { ICreateUserDTO, IUpdateUserAvatarDTO, PublicUserInfoDTO } from '../../dtos'
 import { hash } from 'bcryptjs'
 
 class UsersRepository implements IUsersRepository {
@@ -49,7 +49,7 @@ class UsersRepository implements IUsersRepository {
       name: user.name,
       email: user.email,
       company: user.company,
-      avatar: user.avatar ? user.avatar : '' ,
+      avatar: user.avatar ? user.avatar : '',
       created_at: user.created_at,
       updated_at: user.updated_at,
     }))
@@ -70,6 +70,11 @@ class UsersRepository implements IUsersRepository {
 
     const user = userRepository.update({ id }, { name, email, company, password })
     return user
+  }
+
+  updateUserAvatar({ id, avatar }: IUpdateUserAvatarDTO): Promise<any> {
+    const userRepository = AppDataSource.getRepository(User)
+    return userRepository.update({ id }, { avatar })
   }
 }
 
