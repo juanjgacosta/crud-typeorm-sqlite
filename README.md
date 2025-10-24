@@ -10,10 +10,16 @@ CRUD Project using Typeorm with sqlite database
   - [Example](#example)
 - [User entity](#user-entity)
 - [User Schema Definition](#user-schema-definition)
+- [User Avatar Upload](#user-avatar-upload)
+  - [Key Features](#key-features)
+  - [Example workflow](#example-workflow)
+  - [Implementation Notes](#implementation-notes)
 - [Additional Notes](#additional-notes)
 - [Dependency Injection](#dependency-injection)
   - [How it works](#how-it-works)
 - [API Documentation](#api-documentation)
+
+
 
 ## Project Setup
 
@@ -76,13 +82,36 @@ The `User` entity is defined with the following fields:
 - **email** (`varchar`): The user's email address, which should be unique within the system.
 - **company** (`varchar`): The name of the company the user is associated with.
 - **password** (`varchar`): The user's password, stored as a hashed string.
+- **avatar** (`varchar`): A string reference to the user's avatar file in storage..
 - **created_at** (`timestamp`): The date and time when the user was created, automatically set by the database.
 - **updated_at** (`timestamp`): The date and time when the user's information was last updated, automatically set by the database.
+
+## User Avatar Upload
+
+- The project supports avatar uploads for users, implemented using the [`multer`](https://github.com/expressjs/multer) library.
+
+### Key Features
+
+- Each user can have only one avatar at a time.
+- The uploaded file is stored locally (or in the configured storage service), and its path reference is saved in the avatar field of the User entity.
+- When a user is deleted, the corresponding avatar file is also removed from storage automatically.
+
+### Example workflow
+
+1. Send a ```POST``` request to ```/users/:id/avatar``` with a ```multipart/form-data``` body containing the file field named avatar.
+2. The server saves the file and updates the user record with the new avatar path.
+3. If the user already had an avatar, the previous one is deleted before saving the new file.
+
+### Implementation Notes
+
+- File upload parsing and validation are handled by ```multer```.
+- The upload logic resides in a dedicated service responsible for linking and removing avatar files.
 
 ## Additional Notes
 
 - **Email Uniqueness**: The project verifies that the email field is unique to avoid duplicate user accounts.
 - **Password Storage**: The password is always saved as an encrypted string for security reasons.
+- **Avatar Lifecycle**: Each user has a single avatar, which is automatically deleted if the user is removed.
 
 ## Dependency Injection
 
