@@ -413,6 +413,82 @@
           }
         }
       }
+    },
+    "/users/{id}/avatar": {
+      "patch": {
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Update user Avatar",
+        "description": "Update a user avatar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserAvatar"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Not Content",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResponse"
+                },
+                "examples": {
+                  "TokenMissing": {
+                    "value": {
+                      "status": "error",
+                      "message": "Token missing"
+                    }
+                  },
+                  "TokenExpired": {
+                    "value": {
+                      "status": "error",
+                      "message": "Token expired"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                },
+                "example": {
+                  "status": "error",
+                  "message": "User not registered"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -504,6 +580,16 @@
         "properties": {
           "message": {
             "type": "string"
+          }
+        }
+      },
+      "UpdateUserAvatar": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "Avatar file to upload"
           }
         }
       },

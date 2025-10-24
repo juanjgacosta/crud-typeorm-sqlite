@@ -1,18 +1,21 @@
 import { inject, injectable } from 'tsyringe'
-import { AppError } from '../../../../errors/AppError'
-import { User } from '../../entities/User'
 import { IUsersRepository } from '../../repositories/IUsersRepository'
+import { AppError } from '../../../../errors/AppError'
 import { deleteFile } from '../../../../utils/file'
+
+interface IRequest {
+  user_id: string
+  avatar_file: any
+}
+
 @injectable()
-class RemoveUserUseCase {
+class UpdateUserAvatarUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository
   ) {}
-
-  async execute(id: string): Promise<User> {
-    const user = await this.usersRepository.findUserById(id)
-
+  async execute({ user_id, avatar_file }: IRequest): Promise<void> {
+    const user = await this.usersRepository.findUserById(user_id)
     if (!user) {
       throw new AppError('User not registered', 404)
     }
@@ -20,10 +23,11 @@ class RemoveUserUseCase {
     if (user.avatar) {
       await deleteFile(`./tmp/avatar/${user.avatar}`)
     }
-    await this.usersRepository.removeUser(id)
+    
+    user.avatar = avatar_file
 
-    return user
+    await this.usersRepository.updateUserAvatar(user)
   }
 }
 
-export { RemoveUserUseCase }
+export { UpdateUserAvatarUseCase }
