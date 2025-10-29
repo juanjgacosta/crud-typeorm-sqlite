@@ -11,7 +11,8 @@
     "typeorm": "tsx watch ./node_modules/typeorm/cli.js",
     "dev:migration:create": "typeorm migration:create ./src/database/migrations/$npm_config_name",
     "dev:migration:run": "npm run typeorm -- migration:run -d ./src/database/data-source.ts",
-    "dev:migration:revert": "npm run typeorm -- migration:revert -d ./src/database/data-source.ts"
+    "dev:migration:revert": "npm run typeorm -- migration:revert -d ./src/database/data-source.ts",
+    "test": "jest"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -28,11 +29,15 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.3",
     "@types/express": "^4.17.17",
+    "@types/jest": "^30.0.0",
     "@types/jsonwebtoken": "^9.0.2",
     "@types/multer": "^2.0.0",
     "@types/node": "^20.5.1",
     "@types/uuid": "^9.0.2",
     "express-async-errors": "^3.1.1",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
   }
