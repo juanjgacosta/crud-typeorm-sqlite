@@ -1,17 +1,16 @@
 import { AppDataSource } from '../../../../database/data-source'
 import { User } from '../../entities/User'
 import { IUsersRepository } from '../IUsersRepository'
-import { ICreateUserDTO, IUpdateUserAvatarDTO, PublicUserInfoDTO } from '../../dtos'
+import { ICreateUserDTO, IUpdateUserDTO, IUpdateUserAvatarDTO, PublicUserInfoDTO } from '../../dtos'
 import { hash } from 'bcryptjs'
 
 class UsersRepository implements IUsersRepository {
-  async createUser({ id, name, email, company, password, avatar }: ICreateUserDTO): Promise<User> {
+  async createUser({ name, email, company, password, avatar }: ICreateUserDTO): Promise<User> {
     const userRepository = AppDataSource.getRepository(User)
 
     const passwordHash = await hash(password, 8)
 
     const user = userRepository.create({
-      id,
       name,
       email,
       company,
@@ -55,6 +54,17 @@ class UsersRepository implements IUsersRepository {
     }))
   }
 
+  async updateUser({ id, name, email, company, password }: IUpdateUserDTO): Promise<any> {
+    const userRepository = AppDataSource.getRepository(User)
+
+    if (password !== undefined) {
+      password = await hash(password, 8)
+    }
+
+    const user = userRepository.update({ id }, { name, email, company, password })
+    return user
+  }
+
   async removeUser(id: string): Promise<User> {
     const userRepository = AppDataSource.getRepository(User)
     const user = await userRepository.findOne({
@@ -63,13 +73,6 @@ class UsersRepository implements IUsersRepository {
       },
     })
     return await userRepository.remove(user)
-  }
-
-  updateUser({ id, name, email, company, password }: ICreateUserDTO): Promise<any> {
-    const userRepository = AppDataSource.getRepository(User)
-
-    const user = userRepository.update({ id }, { name, email, company, password })
-    return user
   }
 
   updateUserAvatar({ id, avatar }: IUpdateUserAvatarDTO): Promise<any> {
