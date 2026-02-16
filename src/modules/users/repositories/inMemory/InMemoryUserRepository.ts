@@ -48,8 +48,16 @@ class InMemoryUserRepository implements IUsersRepository {
     return user
   }
 
-  removeUser(id: string): Promise<User> {
-    throw new Error('Method not implemented.')
+  async removeUser(id: string): Promise<User> {
+    // const user = await this.findUserById(id)
+    const index = this.users.findIndex((user) => user.id === id)
+
+    if (index === -1) {
+      return null
+    }
+
+    const [removedUser] = this.users.splice(index, 1)
+    return removedUser
   }
 
   updateUserAvatar({ id, avatar }: IUpdateUserAvatarDTO): Promise<any> {

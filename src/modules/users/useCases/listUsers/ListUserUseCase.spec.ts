@@ -33,7 +33,7 @@ describe('List Users', () => {
     expect(user2).toHaveProperty('id')
 
     const users = await listUsersUseCase.execute()
-    console.log('## users: ', users)
+    // console.log('## users: ', users)
 
     expect(users).toHaveLength(2)
     expect(users[0]).toHaveProperty('id')
