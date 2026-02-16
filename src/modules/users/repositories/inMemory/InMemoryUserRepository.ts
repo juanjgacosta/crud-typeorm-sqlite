@@ -34,16 +34,17 @@ class InMemoryUserRepository implements IUsersRepository {
     return this.users
   }
 
-  async updateUser({ id, name, email, company, password, avatar }: IUpdateUserDTO): Promise<any> {
+  async updateUser({ id, name, email, company, password }: IUpdateUserDTO): Promise<any> {
     const user = await this.findUserById(id)
-
-    const passwordHash = await hash(password, 8)
 
     user.name = name !== undefined ? name : user.name
     user.email = email !== undefined ? email : user.email
     user.company = company !== undefined ? company : user.company
-    user.password = password !== undefined ? passwordHash : user.password
-    user.avatar = avatar !== undefined ? avatar : user.avatar
+    if (password !== undefined) {
+      user.password = await hash(password, 8)
+    } else {
+      user.password = user.password
+    }
 
     return user
   }

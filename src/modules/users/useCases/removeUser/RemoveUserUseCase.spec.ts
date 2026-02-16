@@ -34,7 +34,7 @@ describe('Remove User', () => {
 
   it('should not be able to remove a nonexistent user', () => {
     expect(async () => {
-      const id = null
+      const id = 'invalid-id'
       await removeUserUseCase.execute(id)
     }).rejects.toBeInstanceOf(AppError)
   })
