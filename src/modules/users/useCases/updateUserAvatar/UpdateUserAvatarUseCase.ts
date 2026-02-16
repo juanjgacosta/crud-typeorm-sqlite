@@ -12,7 +12,7 @@ interface IRequest {
 class UpdateUserAvatarUseCase {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
   ) {}
   async execute({ user_id, avatar_file }: IRequest): Promise<void> {
     const user = await this.usersRepository.findUserById(user_id)
@@ -23,10 +23,8 @@ class UpdateUserAvatarUseCase {
     if (user.avatar) {
       await deleteFile(`./tmp/avatar/${user.avatar}`)
     }
-    
-    user.avatar = avatar_file
 
-    await this.usersRepository.updateUserAvatar(user)
+    await this.usersRepository.updateUserAvatar({ id: user_id, avatar: avatar_file })
   }
 }
 
