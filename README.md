@@ -17,6 +17,8 @@ CRUD Project using Typeorm with sqlite database
 - [Additional Notes](#additional-notes)
 - [Dependency Injection](#dependency-injection)
   - [How it works](#how-it-works)
+- [Testing](#testing)
+  - [How to Run Tests](#how-to-run-tests)
 - [API Documentation](#api-documentation)
 
 
@@ -142,6 +144,26 @@ class CreateUserUseCase {
   }
 }
 ````
+
+## Testing
+
+The project contains unit tests for all business rules implemented in the application.
+
+Each service (UseCase) has its own dedicated test file, following the naming convention:
+
+```
+*.spec.ts
+```
+
+This ensures that every business rule is validated in isolation.
+
+### How to Run Tests
+
+To execute the test suite:
+
+```bash
+npm run test
+```
 
 ## API Documentation
 
