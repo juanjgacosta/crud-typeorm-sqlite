@@ -1,3 +1,4 @@
+![Jest](https://img.shields.io/badge/tested_with-jest-blue)
 <h1> CRUD </h1>
 
 CRUD Project using Typeorm with sqlite database
@@ -19,6 +20,7 @@ CRUD Project using Typeorm with sqlite database
   - [How it works](#how-it-works)
 - [Testing](#testing)
   - [How to Run Tests](#how-to-run-tests)
+  - [Testing Strategy](#testing-strategy)
 - [API Documentation](#api-documentation)
 
 
@@ -164,6 +166,20 @@ To execute the test suite:
 ```bash
 npm run test
 ```
+
+### Testing Strategy
+
+- All **UseCases** are tested individually.
+- The project uses an InMemory repository implementation to isolate business logic from the database.
+- Tests validate:
+  - Successful execution flows
+  - Error scenarios
+  - Business rule constraints
+- External dependencies (e.g., file system, database) are mocked or replaced with in-memory implementations.
+- This approach guarantees:
+  - High reliability
+  - Fast execution
+  - Clear separation between infrastructure and domain logic
 
 ## API Documentation
 
