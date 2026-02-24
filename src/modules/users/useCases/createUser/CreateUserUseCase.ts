@@ -9,7 +9,7 @@ class CreateUserUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository
-  ) {}
+  ) { }
 
   async execute({ name, email, company, password, avatar }: ICreateUserDTO): Promise<User> {
     const userExists = await this.usersRepository.findUserByEmail(email)

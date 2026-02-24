@@ -42,7 +42,7 @@ class AuthenticateUserUseCase {
       '934651a3c23ade31c1328656b9497e19',
       {
         subject: user.id,
-        expiresIn: '5m',
+        expiresIn: '30m',
       }
     )
 

@@ -32,7 +32,8 @@ usersRoutes.post('/auth', authenticateUserController.handle)
 
 usersRoutes.patch(
   '/:id/avatar',
-  ensureAuthenticated,uploadAvatar.single('avatar'),
+  ensureAuthenticated,
+  uploadAvatar.single('avatar'),
   updateUserAvatarController.handle
 )
 

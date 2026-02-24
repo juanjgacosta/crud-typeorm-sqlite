@@ -8,7 +8,8 @@ class UpdateUserController {
     const { name, email, company, password } = req.body
 
     const updateUserUseCase = container.resolve(UpdateUserUseCase)
-    const user = await updateUserUseCase.execute({ id, name, email, company, password })
+
+    await updateUserUseCase.execute({ id, name, email, company, password })
 
     return res.status(200).json({ message: `user - ${email} - updated` })
   }

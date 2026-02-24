@@ -1,0 +1,347 @@
+type: collection.insomnia.rest/5.0
+name: CRUD TypeORM SQLite
+meta:
+  id: wrk_83a7f44717294f498cf41547a191ee79
+  created: 1692625154040
+  modified: 1692625154040
+  description: ""
+collection:
+  - url: "{{ _.baseURL }}/users"
+    name: Create User
+    meta:
+      id: req_f3ade9c3c6e049ec8384c5446d1ab824
+      created: 1692625195241
+      modified: 1766552266478
+      isPrivate: false
+      description: ""
+      sortKey: -1692625195241
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "John Doe",
+        	"email": "johndoe@email.com",
+        	"company": "Company Name",
+        	"password": "mudar123",
+        	"avatar": ""
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: Insomnia/2023.5.5
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/users"
+    name: Read Users
+    meta:
+      id: req_5581c06fabc24273bef51f20e97fe9f8
+      created: 1692627343517
+      modified: 1753200063626
+      isPrivate: false
+      description: ""
+      sortKey: -1692387074037
+    method: GET
+    headers:
+      - name: User-Agent
+        value: Insomnia/2023.5.5
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/users/f258515f-9e1c-4554-a067-80deaeaab560"
+    name: Delete User
+    meta:
+      id: req_7ccd4e9eb644460d8bd95280be616141
+      created: 1692632998717
+      modified: 1761324474411
+      isPrivate: false
+      description: ""
+      sortKey: -1692268013435
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: Insomnia/2023.5.5
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+      disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/users/faa43b5e-f8f8-4f35-b154-4fd0a00d19ac"
+    name: Update User
+    meta:
+      id: req_cb37142372c247c79153189781f2befc
+      created: 1692638186248
+      modified: 1766554750165
+      isPrivate: false
+      description: ""
+      sortKey: -1692327543736
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "John Doe updated",
+        	"email": "john.doe.updated@email.com",
+        	"company": "Company Name Updated",
+        	"password": "mudar456"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: Insomnia/2023.5.5
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/users/auth"
+    name: Authenticate User
+    meta:
+      id: req_78c5e4789f5349f3bf5466e46b1626c7
+      created: 1693871676901
+      modified: 1761321296037
+      isPrivate: false
+      description: ""
+      sortKey: -1692208483034
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "johndoe@email.com",
+        	"password": "mudar123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: Insomnia/2023.5.5
+    authentication:
+      type: none
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/checkHealth"
+    name: Check Healt
+    meta:
+      id: req_73bd3b2df87242d28aa3ab1dada780e6
+      created: 1724223633189
+      modified: 1724223654446
+      isPrivate: false
+      description: ""
+      sortKey: -1692625195341
+    method: GET
+    headers:
+      - name: User-Agent
+        value: Insomnia/2023.5.5
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/users/f258515f-9e1c-4554-a067-80deaeaab560/avatar"
+    name: Add Avatar
+    meta:
+      id: req_88557bba8b0f4b3b91a37bfbb6437dfd
+      created: 1760713514340
+      modified: 1761323657830
+      isPrivate: false
+      description: ""
+      sortKey: -1692208482934
+    method: PATCH
+    body:
+      mimeType: multipart/form-data
+      params:
+        - id: pair_ccf5491b8d7a4a339b0a175f37047690
+          name: avatar
+          value: ""
+          description: ""
+          disabled: false
+          type: file
+          fileName: /Users/juan/MuGoL/FotosVideos/Documentos/perfil-google.jpg
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/11.4.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/users"
+    name: Create User 2
+    meta:
+      id: req_f7bba66b8b0845fc89d2fd21112a0eb9
+      created: 1766552260614
+      modified: 1766552260614
+      isPrivate: false
+      description: ""
+      sortKey: -1692506134639
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "John Doe 2",
+        	"email": "johndoe2@email.com",
+        	"company": "Company Name",
+        	"password": "mudar123",
+        	"avatar": ""
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: Insomnia/2023.5.5
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/users"
+    name: Create User 3
+    meta:
+      id: req_8b079bff1cee4469929e210804f53a8e
+      created: 1766554408872
+      modified: 1766554417772
+      isPrivate: false
+      description: ""
+      sortKey: -1692446604338
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "John Doe 3",
+        	"email": "johndoe3@email.com",
+        	"company": "Company Name",
+        	"password": "mudar123",
+        	"avatar": ""
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: Insomnia/2023.5.5
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseURL }}/users/8158dd56-058a-4836-8cc9-cb5770deb396"
+    name: Update User without password
+    meta:
+      id: req_c9200bf72fdc4160906d7bc1948f7f27
+      created: 1766555004236
+      modified: 1766555015391
+      isPrivate: false
+      description: ""
+      sortKey: -1692297778585.5
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "John Doe updated",
+        	"email": "john.doe.updated@email.com",
+        	"company": "Company Name Updated"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: Insomnia/2023.5.5
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_f80e2ac845a7aab542e110ef53020539e525f1c1
+    created: 1692625154042
+    modified: 1692625154042
+environments:
+  name: Base Environment
+  meta:
+    id: env_f80e2ac845a7aab542e110ef53020539e525f1c1
+    created: 1692625154041
+    modified: 1692625154041
+    isPrivate: false
+  subEnvironments:
+    - name: crudTypeORM
+      meta:
+        id: env_cf5b203267834554ab182c8b41ad46f7
+        created: 1692625163299
+        modified: 1766552019576
+        isPrivate: false
+        sortKey: 1692625163299
+      data:
+        baseURL: http://localhost:4000
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZW1haWwuY29tIiwiaWF0IjoxNzY2NTUyMDA4LCJleHAiOjE3NjY1NTIzMDgsInN1YiI6ImEwZDQ3ZjRkLWYwMTctNDFhZC05MzcwLWNhODBhYzRlYjQyNCJ9.zM0g0udmRkPKznP0W0NGHUwqRXAsVF5YiSa-k7zjez0
+        string_hash: juancrudtypeormsqlite
+        md5_hash: 934651a3c23ade31c1328656b9497e19
+        sha1_hash: 8b1396501dce0210c412f7ffa0f823dc10c067eb
