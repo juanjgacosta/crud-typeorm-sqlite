@@ -1,6 +1,6 @@
-import { InMemoryUserRepository } from '../../repositories/inMemory/InMemoryUserRepository'
-import { CreateUserUseCase } from '../createUser/CreateUserUseCase'
-import { ListUsersUseCase } from './ListUsersUseCase'
+import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
+import { CreateUserUseCase } from '../useCases/createUser/CreateUserUseCase'
+import { ListUsersUseCase } from '../useCases/listUsers/ListUsersUseCase'
 
 let createUserUseCase: CreateUserUseCase
 let inMemoryUserRepository: InMemoryUserRepository

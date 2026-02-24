@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import { AppError } from '../errors/AppError'
 import { verify } from 'jsonwebtoken'
 import { TokenExpiredError } from 'jsonwebtoken'
-import { UsersRepository } from '../modules/users/repositories/implementations/UsersRepository'
+import { UsersRepository } from '../../modules/users/repositories/implementations/UsersRepository'
 
 export async function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
   const authHEader = req.headers.authorization
@@ -23,7 +23,6 @@ export async function ensureAuthenticated(req: Request, res: Response, next: Nex
     const usersRepository = new UsersRepository()
 
     const user = await usersRepository.findUserById(userId)
-    
   } catch (err) {
     if (err instanceof TokenExpiredError) {
       throw new AppError('Token expired', 401)

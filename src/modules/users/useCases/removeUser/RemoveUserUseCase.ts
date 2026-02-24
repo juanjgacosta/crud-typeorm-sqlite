@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe'
-import { AppError } from '../../../../errors/AppError'
+import { AppError } from '../../../../shared/errors/AppError'
 import { User } from '../../entities/User'
 import { IUsersRepository } from '../../repositories/IUsersRepository'
 import { deleteFile } from '../../../../utils/file'
@@ -7,7 +7,7 @@ import { deleteFile } from '../../../../utils/file'
 class RemoveUserUseCase {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
   ) {}
 
   async execute(id: string): Promise<User> {

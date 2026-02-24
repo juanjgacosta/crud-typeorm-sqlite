@@ -1,7 +1,7 @@
-import { InMemoryUserRepository } from '../../repositories/inMemory/InMemoryUserRepository'
-import { UpdateUserAvatarUseCase } from './UpdateUserAvatarUseCase'
-import { CreateUserUseCase } from '../createUser/CreateUserUseCase'
-import { AppError } from '../../../../errors/AppError'
+import { AppError } from '../../../shared/errors/AppError'
+import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
+import { UpdateUserAvatarUseCase } from '../useCases/updateUserAvatar/UpdateUserAvatarUseCase'
+import { CreateUserUseCase } from '../useCases/createUser/CreateUserUseCase'
 
 let createUserUseCase: CreateUserUseCase
 let updateUserAvatarUseCase: UpdateUserAvatarUseCase

@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import express, { Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
 import swaggerUi from 'swagger-ui-express'
-import { AppError } from './errors/AppError'
+import { AppError } from './shared/errors/AppError'
 
 import { usersRoutes } from './routes/users.routes'
 import './database/data-source.ts'

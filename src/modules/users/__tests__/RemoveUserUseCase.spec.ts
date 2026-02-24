@@ -1,7 +1,7 @@
-import { AppError } from '../../../../errors/AppError'
-import { InMemoryUserRepository } from '../../repositories/inMemory/InMemoryUserRepository'
-import { CreateUserUseCase } from '../createUser/CreateUserUseCase'
-import { RemoveUserUseCase } from './RemoveUserUseCase'
+import { AppError } from '../../../shared/errors/AppError'
+import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
+import { CreateUserUseCase } from '../useCases/createUser/CreateUserUseCase'
+import { RemoveUserUseCase } from '../useCases/removeUser/RemoveUserUseCase'
 
 let createUserUseCase: CreateUserUseCase
 let removeUserUseCase: RemoveUserUseCase
