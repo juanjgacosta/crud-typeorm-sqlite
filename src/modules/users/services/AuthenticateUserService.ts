@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
-import { AppError } from '../../../../shared/errors/AppError'
-import { IUsersRepository } from '../../repositories/IUsersRepository'
+import { AppError } from '../../../shared/errors/AppError'
+import { IUsersRepository } from '../repositories/IUsersRepository'
 import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
 
@@ -16,7 +16,7 @@ interface IResponse {
 }
 
 @injectable()
-class AuthenticateUserUseCase {
+class AuthenticateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -56,4 +56,4 @@ class AuthenticateUserUseCase {
   }
 }
 
-export { AuthenticateUserUseCase }
+export { AuthenticateUserService }

@@ -1,10 +1,10 @@
 import { inject, injectable } from 'tsyringe'
-import { AppError } from '../../../../shared/errors/AppError'
-import { User } from '../../entities/User'
-import { IUsersRepository } from '../../repositories/IUsersRepository'
-import { deleteFile } from '../../../../utils/file'
+import { AppError } from '../../../shared/errors/AppError'
+import { User } from '../entities/User'
+import { IUsersRepository } from '../repositories/IUsersRepository'
+import { deleteFile } from '../../../utils/file'
 @injectable()
-class RemoveUserUseCase {
+class RemoveUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -26,4 +26,4 @@ class RemoveUserUseCase {
   }
 }
 
-export { RemoveUserUseCase }
+export { RemoveUserService }

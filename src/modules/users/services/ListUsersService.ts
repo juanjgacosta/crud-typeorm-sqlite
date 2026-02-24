@@ -1,11 +1,11 @@
 import { inject, injectable } from 'tsyringe'
-import { IUsersRepository } from '../../repositories/IUsersRepository'
-import { PublicUserInfoDTO } from '../../dtos'
+import { IUsersRepository } from '../repositories/IUsersRepository'
+import { PublicUserInfoDTO } from '../dtos'
 @injectable()
-class ListUsersUseCase {
+class ListUsersService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
   ) {}
 
   async execute(): Promise<PublicUserInfoDTO[]> {
@@ -14,4 +14,4 @@ class ListUsersUseCase {
   }
 }
 
-export { ListUsersUseCase }
+export { ListUsersService }

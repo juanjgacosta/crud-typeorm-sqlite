@@ -1,7 +1,7 @@
 import { AppError } from '../../../shared/errors/AppError'
 import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
-import { UpdateUserAvatarUseCase } from '../useCases/updateUserAvatar/UpdateUserAvatarUseCase'
-import { CreateUserUseCase } from '../useCases/createUser/CreateUserUseCase'
+import { UpdateUserAvatarUseCase } from '../services/UpdateUserAvatarService'
+import { CreateUserUseCase } from '../services/createUser/CreateUserUseCase'
 
 let createUserUseCase: CreateUserUseCase
 let updateUserAvatarUseCase: UpdateUserAvatarUseCase
