@@ -85,11 +85,11 @@ The project uses **TypeORM** migrations to manage database schema changes.
 
 ### Migration Commands
 
-| Action                    | Script (package.json)                                                                            | Terminal Command                                    |
-| ------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------- |
-| 🆕 Create a new migration | `"dev:migration:create": "typeorm migration:create ./src/database/migrations/$npm_config_name"`  | `npm run dev:migration:create --name=MigrationName` |
-| ▶️ Run migrations         | `"dev:migration:run": "npm run typeorm -- migration:run -d ./src/database/data-source.ts"`       | `npm run dev:migration:run`                         |
-| ⏪ Revert last migration  | `"dev:migration:revert": "npm run typeorm -- migration:revert -d ./src/database/data-source.ts"` | `npm run dev:migration:revert`                      |
+| Action                    | <div align="center">Command </div>                  |
+| ------------------------- | --------------------------------------------------- |
+| 🆕 Create a new migration | `npm run dev:migration:create --name=MigrationName` |
+| ▶️ Run migrations         | `npm run dev:migration:run`                         |
+| ⏪ Revert last migration  | `npm run dev:migration:revert`                      |
 
 ### Example
 
