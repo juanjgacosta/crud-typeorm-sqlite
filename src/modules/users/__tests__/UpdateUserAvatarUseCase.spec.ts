@@ -1,21 +1,21 @@
 import { AppError } from '../../../shared/errors/AppError'
 import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
-import { UpdateUserAvatarUseCase } from '../services/UpdateUserAvatarService'
-import { CreateUserUseCase } from '../services/createUser/CreateUserUseCase'
+import { UpdateUserAvatarService } from '../services/UpdateUserAvatarService'
+import { CreateUserService } from '../services/CreateUserService'
 
-let createUserUseCase: CreateUserUseCase
-let updateUserAvatarUseCase: UpdateUserAvatarUseCase
+let createUserService: CreateUserService
+let updateUserAvatarService: UpdateUserAvatarService
 let inMemoryUserRepository: InMemoryUserRepository
 
 describe('Update User Avatar', () => {
   beforeEach(() => {
     inMemoryUserRepository = new InMemoryUserRepository()
-    createUserUseCase = new CreateUserUseCase(inMemoryUserRepository)
-    updateUserAvatarUseCase = new UpdateUserAvatarUseCase(inMemoryUserRepository)
+    createUserService = new CreateUserService(inMemoryUserRepository)
+    updateUserAvatarService = new UpdateUserAvatarService(inMemoryUserRepository)
   })
 
   it('should be able to update the avatar of an existent user', async () => {
-    const user = await createUserUseCase.execute({
+    const user = await createUserService.execute({
       name: 'User Test',
       email: 'user.test@email.com',
       company: 'Company Test',
@@ -25,12 +25,12 @@ describe('Update User Avatar', () => {
 
     expect(user).toHaveProperty('id')
 
-    await updateUserAvatarUseCase.execute({ user_id: user.id, avatar_file: 'avatar.png' })
+    await updateUserAvatarService.execute({ user_id: user.id, avatar_file: 'avatar.png' })
   })
   it('should not be able to update a avatar of an nonexistent user', () => {
     expect(async () => {
       const id = 'invalid-id'
-      await updateUserAvatarUseCase.execute({
+      await updateUserAvatarService.execute({
         user_id: id,
         avatar_file: 'avatar.png',
       })
