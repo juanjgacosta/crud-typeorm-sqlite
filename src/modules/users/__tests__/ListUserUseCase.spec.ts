@@ -1,19 +1,19 @@
-import { InMemoryUserRepository } from '../../repositories/inMemory/InMemoryUserRepository'
-import { CreateUserUseCase } from '../createUser/CreateUserUseCase'
-import { ListUsersUseCase } from './ListUsersUseCase'
+import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
+import { CreateUserService } from '../services/CreateUserService'
+import { ListUsersService } from '../services/ListUsersService'
 
-let createUserUseCase: CreateUserUseCase
+let createUserService: CreateUserService
 let inMemoryUserRepository: InMemoryUserRepository
-let listUsersUseCase: ListUsersUseCase
+let listUsersService: ListUsersService
 
 describe('List Users', () => {
   beforeEach(() => {
     inMemoryUserRepository = new InMemoryUserRepository()
-    createUserUseCase = new CreateUserUseCase(inMemoryUserRepository)
-    listUsersUseCase = new ListUsersUseCase(inMemoryUserRepository)
+    createUserService = new CreateUserService(inMemoryUserRepository)
+    listUsersService = new ListUsersService(inMemoryUserRepository)
   })
   it('should be able to list all registered users', async () => {
-    const user1 = await createUserUseCase.execute({
+    const user1 = await createUserService.execute({
       name: 'User Test 1',
       email: 'user1.test@email.com',
       company: 'Company Test 1',
@@ -23,7 +23,7 @@ describe('List Users', () => {
 
     expect(user1).toHaveProperty('id')
 
-    const user2 = await createUserUseCase.execute({
+    const user2 = await createUserService.execute({
       name: 'User Test 2',
       email: 'user2.test@email.com',
       company: 'Company Test 2',
@@ -32,7 +32,7 @@ describe('List Users', () => {
     })
     expect(user2).toHaveProperty('id')
 
-    const users = await listUsersUseCase.execute()
+    const users = await listUsersService.execute()
     // console.log('## users: ', users)
 
     expect(users).toHaveLength(2)
@@ -45,7 +45,7 @@ describe('List Users', () => {
   })
 
   it('should return an empty array when there are no users', async () => {
-    const users = await listUsersUseCase.execute()
+    const users = await listUsersService.execute()
 
     expect(users).toEqual([])
   })

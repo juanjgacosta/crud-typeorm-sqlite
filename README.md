@@ -11,7 +11,6 @@ RESTful CRUD API built with Node.js, TypeScript, TypeORM and SQLite.
   <img src="https://img.shields.io/badge/architecture-clean--architecture-orange" />
 </p>
 
-
 <h2> Table of Contents </h2>
 
 - [About the Project](#about-the-project)
@@ -34,13 +33,11 @@ RESTful CRUD API built with Node.js, TypeScript, TypeORM and SQLite.
 - [API Documentation](#api-documentation)
 - [Additional Notes](#additional-notes)
 
-
-
 ## About the Project
 
 This is a **CRUD API for user management** built using **Node.js**, **TypeScript**, and **TypeORM**.
 
-The project follows **Clean Architecture principles**, where business rules are implemented in **UseCases** and isolated from infrastructure concerns.
+The project follows **Clean Architecture principles**, where business rules are implemented in **Services** and isolated from infrastructure concerns.
 
 Main features:
 
@@ -61,7 +58,6 @@ Main features:
 - **tsyringe** (dependency injection)
 - **multer** (file uploads)
 - **bcryptjs** (password hashing)
-
 
 ## Project Setup
 
@@ -89,11 +85,11 @@ The project uses **TypeORM** migrations to manage database schema changes.
 
 ### Migration Commands
 
-| Action                               | Script (package.json)                                                                            | Terminal Command                                    |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------ | --------------------------------------------------- |
-| 🆕 Create a new migration            | `"dev:migration:create": "typeorm migration:create ./src/database/migrations/$npm_config_name"`  | `npm run dev:migration:create --name=MigrationName` |
-| ▶️ Run migrations        | `"dev:migration:run": "npm run typeorm -- migration:run -d ./src/database/data-source.ts"`       | `npm run dev:migration:run`                         |
-| ⏪ Revert last migration | `"dev:migration:revert": "npm run typeorm -- migration:revert -d ./src/database/data-source.ts"` | `npm run dev:migration:revert`                      |
+| Action                    | <div align="center">Command </div>                  |
+| ------------------------- | --------------------------------------------------- |
+| 🆕 Create a new migration | `npm run dev:migration:create --name=MigrationName` |
+| ▶️ Run migrations         | `npm run dev:migration:run`                         |
+| ⏪ Revert last migration  | `npm run dev:migration:revert`                      |
 
 ### Example
 
@@ -103,7 +99,6 @@ Creating and applying a migration named `AlterUserAddAvatar`:
 npm run dev:migration:create --name=AlterUserAddAvatar
 npm run dev:migration:run
 ```
-
 
 ## User entity
 
@@ -119,7 +114,6 @@ The `User` entity represents an application user and contains:
 | avatar     | varchar   | Avatar file reference |
 | created_at | timestamp | Creation date         |
 | updated_at | timestamp | Last update date      |
-
 
 ## User Avatar Upload
 
@@ -153,7 +147,7 @@ Example:
 
 ```ts
 @injectable()
-class CreateUserUseCase {
+class CreateUserService {
   constructor(
     @inject("UsersRepository")
     private usersRepository: IUsersRepository,
@@ -169,7 +163,7 @@ class CreateUserUseCase {
 
 The project includes **unit tests for all business rules**.
 
-Each service (UseCase) has a dedicated test file using the naming convention:
+Each **Service** has a dedicated test file using the naming convention:
 
 ```
 *.spec.ts
@@ -177,7 +171,7 @@ Each service (UseCase) has a dedicated test file using the naming convention:
 
 ### Testing Strategy
 
-- Each **UseCase** is tested in isolation.
+- Each **Service** is tested in isolation.
 - An **InMemory repository** is used to avoid database dependency.
 - Tests validate:
   - Successful execution flows
@@ -206,10 +200,10 @@ http://localhost:4000/documentation
 ```
 
 You can:
+
 - Explore endpoints
 - Test requests
 - View parameters and responses
-
 
 ## Additional Notes
 

@@ -1,21 +1,21 @@
-import { AppError } from '../../../../errors/AppError'
-import { InMemoryUserRepository } from '../../repositories/inMemory/InMemoryUserRepository'
-import { CreateUserUseCase } from '../createUser/CreateUserUseCase'
-import { UpdateUserUseCase } from './UpdateUserUseCase'
+import { AppError } from '../../../shared/errors/AppError'
+import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
+import { CreateUserService } from '../services/CreateUserService'
+import { UpdateUserService } from '../services/UpdateUserService'
 
-let createUserUseCase: CreateUserUseCase
-let updateUserUseCase: UpdateUserUseCase
+let createUserService: CreateUserService
+let updateUserService: UpdateUserService
 let inMemoryUserRepository: InMemoryUserRepository
 
 describe('Update User', () => {
   beforeEach(() => {
     inMemoryUserRepository = new InMemoryUserRepository()
-    createUserUseCase = new CreateUserUseCase(inMemoryUserRepository)
-    updateUserUseCase = new UpdateUserUseCase(inMemoryUserRepository)
+    createUserService = new CreateUserService(inMemoryUserRepository)
+    updateUserService = new UpdateUserService(inMemoryUserRepository)
   })
 
   it('should be able to update an existent user', async () => {
-    const user = await createUserUseCase.execute({
+    const user = await createUserService.execute({
       name: 'User Test',
       email: 'user.test@email.com',
       company: 'Company Test',
@@ -25,7 +25,7 @@ describe('Update User', () => {
 
     expect(user).toHaveProperty('id')
 
-    const updatedUser = await updateUserUseCase.execute({
+    const updatedUser = await updateUserService.execute({
       id: user.id,
       name: 'User Updated',
       email: 'user.updated@email.com',
@@ -40,7 +40,7 @@ describe('Update User', () => {
   it('should not be able to update a nonexistent user', () => {
     expect(async () => {
       const id = 'invalid-id'
-      await updateUserUseCase.execute({
+      await updateUserService.execute({
         id,
         name: 'User Updated',
         email: 'user.updated@email.com',

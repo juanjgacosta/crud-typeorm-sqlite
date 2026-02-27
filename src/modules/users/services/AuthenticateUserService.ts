@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe'
-import { IUsersRepository } from '../../repositories/IUsersRepository'
+import { AppError } from '../../../shared/errors/AppError'
+import { IUsersRepository } from '../repositories/IUsersRepository'
 import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
-import { AppError } from '../../../../errors/AppError'
 
 interface IRequest {
   email: string
@@ -16,10 +16,10 @@ interface IResponse {
 }
 
 @injectable()
-class AuthenticateUserUseCase {
+class AuthenticateUserService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
   ) {}
 
   async execute({ email, password }: IRequest) {
@@ -43,7 +43,7 @@ class AuthenticateUserUseCase {
       {
         subject: user.id,
         expiresIn: '30m',
-      }
+      },
     )
 
     const tokenReturn: IResponse = {
@@ -56,4 +56,4 @@ class AuthenticateUserUseCase {
   }
 }
 
-export { AuthenticateUserUseCase }
+export { AuthenticateUserService }

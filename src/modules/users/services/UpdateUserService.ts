@@ -1,14 +1,14 @@
 import { inject, injectable } from 'tsyringe'
-import { AppError } from '../../../../errors/AppError'
-import { User } from '../../entities/User'
-import { IUsersRepository } from '../../repositories/IUsersRepository'
-import { IUpdateUserDTO } from '../../dtos'
+import { AppError } from '../../../shared/errors/AppError'
+import { User } from '../entities/User'
+import { IUsersRepository } from '../repositories/IUsersRepository'
+import { IUpdateUserDTO } from '../dtos'
 
 @injectable()
-class UpdateUserUseCase {
+class UpdateUserService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
   ) {}
 
   async execute({ id, name, email, company, password }: IUpdateUserDTO): Promise<User> {
@@ -23,4 +23,4 @@ class UpdateUserUseCase {
   }
 }
 
-export { UpdateUserUseCase }
+export { UpdateUserService }

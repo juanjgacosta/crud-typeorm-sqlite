@@ -1,18 +1,18 @@
-import { AppError } from '../../../../errors/AppError'
-import { InMemoryUserRepository } from '../../repositories/inMemory/InMemoryUserRepository'
-import { CreateUserUseCase } from './CreateUserUseCase'
+import { AppError } from '../../../shared/errors/AppError'
+import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
+import { CreateUserService } from '../services/CreateUserService'
 
-let createUserUseCase: CreateUserUseCase
+let createUserService: CreateUserService
 let inMemoryUserRepository: InMemoryUserRepository
 
 describe('Create User', () => {
   beforeEach(() => {
     inMemoryUserRepository = new InMemoryUserRepository()
-    createUserUseCase = new CreateUserUseCase(inMemoryUserRepository)
+    createUserService = new CreateUserService(inMemoryUserRepository)
   })
 
   it('should be able to create a new user', async () => {
-    const user = await createUserUseCase.execute({
+    const user = await createUserService.execute({
       name: 'User Test',
       email: 'user.test@email.com',
       company: 'Company Test',
@@ -25,7 +25,7 @@ describe('Create User', () => {
 
   it('should not be able to create a new user with e-mail that already exists', async () => {
     expect(async () => {
-      const user1 = await createUserUseCase.execute({
+      const user1 = await createUserService.execute({
         name: 'User Test',
         email: 'user.test@email.com',
         company: 'Company Test',
@@ -33,7 +33,7 @@ describe('Create User', () => {
         avatar: '',
       })
 
-      const user2 = await createUserUseCase.execute({
+      const user2 = await createUserService.execute({
         name: 'User Test',
         email: 'user.test@email.com',
         company: 'Company Test',

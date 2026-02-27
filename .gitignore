@@ -1,3 +1,5 @@
+# Database file
+*.sqlite*
 # Logs
 logs
 *.log

@@ -1,15 +1,15 @@
 import { inject, injectable } from 'tsyringe'
-import { AppError } from '../../../../errors/AppError'
-import { User } from '../../entities/User'
-import { IUsersRepository } from '../../repositories/IUsersRepository'
-import { ICreateUserDTO } from '../../dtos'
+import { AppError } from '../../../shared/errors/AppError'
+import { User } from '../entities/User'
+import { IUsersRepository } from '../repositories/IUsersRepository'
+import { ICreateUserDTO } from '../dtos'
 
 @injectable()
-class CreateUserUseCase {
+class CreateUserService {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
-  ) { }
+    private usersRepository: IUsersRepository,
+  ) {}
 
   async execute({ name, email, company, password, avatar }: ICreateUserDTO): Promise<User> {
     const userExists = await this.usersRepository.findUserByEmail(email)
@@ -23,4 +23,4 @@ class CreateUserUseCase {
   }
 }
 
-export { CreateUserUseCase }
+export { CreateUserService }

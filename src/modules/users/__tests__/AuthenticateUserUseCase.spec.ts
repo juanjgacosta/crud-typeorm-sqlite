@@ -1,17 +1,17 @@
-import { AppError } from '../../../../errors/AppError'
-import { InMemoryUserRepository } from '../../repositories/inMemory/InMemoryUserRepository'
-import { CreateUserUseCase } from '../createUser/CreateUserUseCase'
-import { AuthenticateUserUseCase } from './AuthenticateUserUseCase'
+import { AppError } from '../../../shared/errors/AppError'
+import { InMemoryUserRepository } from '../repositories/inMemory/InMemoryUserRepository'
+import { CreateUserService } from '../services/CreateUserService'
+import { AuthenticateUserService } from '../services/AuthenticateUserService'
 
 let inMemoryUserRepository: InMemoryUserRepository
-let createUserUseCase: CreateUserUseCase
-let authenticateUserUseCase: AuthenticateUserUseCase
+let createUserService: CreateUserService
+let authenticateUserService: AuthenticateUserService
 
 describe('Authenticate User', () => {
   beforeEach(() => {
     inMemoryUserRepository = new InMemoryUserRepository()
-    createUserUseCase = new CreateUserUseCase(inMemoryUserRepository)
-    authenticateUserUseCase = new AuthenticateUserUseCase(inMemoryUserRepository)
+    createUserService = new CreateUserService(inMemoryUserRepository)
+    authenticateUserService = new AuthenticateUserService(inMemoryUserRepository)
   })
 
   it('should be able to authenticate a user', async () => {
@@ -23,11 +23,11 @@ describe('Authenticate User', () => {
       avatar: '',
     }
 
-    const userResponse = await createUserUseCase.execute(user)
+    const userResponse = await createUserService.execute(user)
     // console.log(userResponse)
     expect(userResponse).toHaveProperty('id')
 
-    const result = await authenticateUserUseCase.execute({
+    const result = await authenticateUserService.execute({
       email: user.email,
       password: user.password,
     })
@@ -37,7 +37,7 @@ describe('Authenticate User', () => {
 
   it('should not be able to authenticate a nonexistent user', () => {
     expect(async () => {
-      await authenticateUserUseCase.execute({
+      await authenticateUserService.execute({
         email: 'false@email.com',
         password: '1234',
       })
@@ -54,9 +54,9 @@ describe('Authenticate User', () => {
         avatar: '',
       }
 
-      const userResponse = await createUserUseCase.execute(user)
+      const userResponse = await createUserService.execute(user)
 
-      await authenticateUserUseCase.execute({
+      await authenticateUserService.execute({
         email: 'user.test@email.com',
         password: 'incorrectPassword',
       })
